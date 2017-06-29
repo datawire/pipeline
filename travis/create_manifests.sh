@@ -6,6 +6,7 @@ mkdir -p kubernetes/staging
 mkdir -p kubernetes/production
 
 cp -R kubernetes/templates/. kubernetes/staging
+cp -R kubernetes/templates/. kubernetes/production
 
 # Staging
 sed -i "s|__namespace__|${NAMESPACE}|g" kubernetes/staging/service.yaml
