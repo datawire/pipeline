@@ -2,4 +2,4 @@
 set -euxo pipefail
 
 ps aux | grep kubectl
-curl -v http://localhost:5000/ -4
+curl -4 -v http://localhost:37563/
