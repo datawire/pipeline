@@ -32,6 +32,7 @@ def result(**kwargs):
 
     d = dict(kwargs)
     d['hostname'] = os.getenv("HOSTNAME")
+    d['version'] = '1.0'
     d['time'] = datetime.datetime.now().isoformat()
 
     return jsonify(**d)
