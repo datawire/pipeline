@@ -62,16 +62,15 @@ script:
   - sleep 30s
   - bash travis/port_forward.sh
   - bash travis/simulate_remote_tests.sh
-  - bash cleanup_ephemeral.sh
 
 after_success:
-  - bash cleanup_ephemeral.sh
+  - bash travis/cleanup_ephemeral.sh
 
 after_failure:
-  - bash cleanup_ephemeral.sh
+  - bash travis/cleanup_ephemeral.sh
 
 before_deploy:
-  - bash create_manifests.sh
+  - bash travis/create_manifests.sh
 
 deploy:
   - provider: script
