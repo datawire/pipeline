@@ -29,6 +29,12 @@ env:
     # Kubernetes Configuration
     - NAMESPACE=datawire
 
+    # Secure Credentials
+    #
+    # - GH_TOKEN
+    #
+    - secure: "nVdndthl4J+kobY6L+KepewsRo+yR2xmU3DKipz1oPBu34Q7w0hKyMeXHrbuxj6gKKVjlGyPYnvL9xuxgWj9rezNguLpi0QOeL3d25jKBjtZjiIk4Gr8wgIckh6Yy71KRfVxWayW4LRLIBtZfOsZLMNCZtDXLOQWXU9a5/zhmr06RLFBkqyqOodKD69W8acXc1Uhh0+uBwgkX8fn8GRxUdnknUmVzCBx0DNEW+zy4rcb+cX+2Ep7COkmRF2JWOK9z80INkoPbdfN3db355iO2GOk1C8Bp3svJz7p/dkGoIhoOjHntbCmxKzEyyQYeeo3/lvCE5vEHnTehmd6ogAEg6j8wOPIeDUqGAMDymlf1aSMxKL2DmZO1xFyo7AxShjIEprkLPLyzA2ZjDYG06ZkZoO6kQRgHHisIZEBelydrVQnZKHk5w/kLBsF/K3KG6SAoLaqU/g7CsFjEz5wxq5vjDwKSVmUCAq3zC5d9aYijHO20jdZt2WCQPZbSqr2IJNgSwnwCZ43vQRMO1Ur7E6weEet5ldOiDBUFhdxBI7UW9Q/Qo19BDlmUwf90ACPH4/TD/WteoDeZkH1o6n1OcfPmaOKFWbq+ZAxaddyeFCE5eE2kSllCrb4bwyB5j9LD5vvEt2gg1M5l52f+DNM7Vw2hOkGFEIagCW8Ry39494HMCg="
+
 cache:
   pip: true
   directories:

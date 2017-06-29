@@ -1,5 +1,7 @@
 # Deployment Pipeline for Quote of the Moment (QotM) Service
 
+[![Build Status](https://travis-ci.org/datawire/pipeline.svg?branch=master)](https://travis-ci.org/datawire/pipeline)
+
 This is a deployment pipeline for the Quote of the Moment (QotM) service.
 
 The workflow is as follows:
