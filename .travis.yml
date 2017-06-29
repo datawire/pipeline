@@ -61,18 +61,18 @@ script:
   - bash travis/deploy_ephemeral.sh
   - sleep 30s
   - bash travis/port_forward.sh
+  - bash travis/simulate_remote_tests.sh
+  - bash cleanup_ephemeral.sh
 
+after_success:
+  - bash cleanup_ephemeral.sh
 
-#after_success:
-#  - bash travis/push_docker_image.sh
+before_deploy:
+  - bash create_manifests.sh
 
-#after_success:
-##  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash bin/generate_terraform_plan.sh; fi
-##  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then python3 bin/comment_pull_request.py; fi
-#
-#deploy:
-#  - provider: script
-#    skip_cleanup: true
-#    script: travis/deploy.sh prod
-#    on:
-#      branch: master
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: travis/deploy.sh
+    on:
+      branch: master
