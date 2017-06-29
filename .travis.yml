@@ -37,7 +37,7 @@ env:
     # - DOCKER_PASSWORD
     # - GH_TOKEN
     #
-    - secure: "SdK/BMCiGrhHdqhnacTP5Nec8Hb00ut2OkbnKj24jPfqOCWMUW3rbbCJVGFqU4lV4SGd8MF5p5HQBMSxxu3aUltr0YZxWlqCM5SEiMUsc7FuyMfGTDTqrIARwhSNAYnraBEuCBDJ3wJLHTLVNMbPF/QyjxQH4sA59XERq6yaIsqjOPLo0NPq6YWQOd87sg2PEjUWCXkhHtCXZsirli5Jol2/jeis9QWRXHHdRHrESLVzes6WmgO0mu+XkalgZqxR7QfOPbdbTBUIjarEX9223wV6Lz82c+8JtT8gA7vqXSUsNSYyTvvWtNQsrRy6npHqWWn4wxE8dI06VF/yjfTLeDCKnsQhUPT98IcxWhwGRkSbUF9R76D3cEJypsEf3SKP/NaJdaXrLJlB/nc18Wm6LvCzKbAzI0llSsBXCJwfEaNhbAUyuK+ANrkjHXW99JD7+FEOAGNYEv9aTsd4vhrXu5xQr4Y0vp4UHs/LCFPwLD3QNfxbDFCSHV0b/HCv/hpynfR+VoBKCBbhX/pwGcbs1wJvZoIccmIirBej4qpUyQoWiVJ+JJhhJnmpvWSLCtEZKuNHtS+NZPd7rAg3rlUUwl59nX+ndbwu30WMzJwiTdGlGCmm68MYYie6P8/MiNFzRFt6AnFXd5IUj4mDYK6JH7pGheXVTY4X/omhs/ob0us="
+    - secure: "d0VSgIkdg+zJhEZFWd3MvHHFwZF424paQ/X5B82VjUsc/iSEFtx1ErVdFyyfYUE98kU+tMfUyQ3qjwIRIS/pehiEIVCy7BX/V/JBn/7tr+43YCMtflhZ75v3Lq54cedb9SRIDu75RuqNOoEPLtFmOfcah3g0upju6er4p/0C7tqU/a8j+vzgabhxQ55zKcF+hQa8DnqM2qavHHJjKcp0iu2bxAP80b2LVMfRRw5PaEh295B9PloVY02Mba5xr6MJxrd9Hxa2YJCkRbXoVLG9KLofgbSbAR5130JZQn6p5wXjlGosSzEwwRvQU3DYSJuVW6mbzm/K6ZrFe2xj80kXSgt9OOqSO2vwyMIwOfJB6ElCjmovJUIKgBe4ba619zDcoLTJdetQGB9XybYqlSAkkDqdoSNlXC7VG1bToog3vfIO0zkmSl9E8Eur0zJ/RrFAq/N9j7T4v2QM7DJP/HlqspUuWiY6RL+Zx8LT4g9YP0+1tGslh/KkjTXWuxUshAAd29DXMqU1cZh7DRpzQr9jIhCl7vAWRTkOLF6eYs50PYsyMBhFOHQza93WZAPjmFFP7Ka9ZW2VSEKQTSzXx69SGmx1CmBJEqISFQ/igIlcGDAYKaGzN7hRBavf3PTJ4Uuhyp/DgTbOLaxbsmziTgXTVxCd+T+wzs9ekt39mjwfxD4="
 
 cache:
   pip: true
@@ -59,6 +59,8 @@ script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - bash travis/push_docker_image.sh
   - bash travis/deploy_ephemeral.sh
+  - sleep 30s
+  - bash travis/port_forward.sh
 
 
 #after_success:
