@@ -67,6 +67,9 @@ script:
 after_success:
   - bash cleanup_ephemeral.sh
 
+after_failure:
+  - bash cleanup_ephemeral.sh
+
 before_deploy:
   - bash create_manifests.sh
 
