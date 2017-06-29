@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 set -euxo pipefail
 
-curl -v 127.0.0.1:5000/ -4
+ps aux | grep kubectl
+curl -v http://localhost:5000/ -4
