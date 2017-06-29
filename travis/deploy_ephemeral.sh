@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 DOCKER_IMAGE=${DOCKER_IMAGE:?Variable DOCKER_IMAGE not set}
-TRAVIS_COMMIT=${TRAVIS_COMMIT:?Variable TRAVIS_COMMIT not set}
-NAMESPACE="${NAMESPACE}-${TRAVIS_COMMIT}"
+COMMIT_HASH=${COMMIT_HASH:?Variable COMMIT_HASH not set}
+NAMESPACE="${NAMESPACE}-${COMMIT_HASH}"
 
 kubectl create namespace "${NAMESPACE}"
 

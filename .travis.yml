@@ -11,6 +11,8 @@ env:
     - TOOLS_DIR=${HOME}/bin
     - PATH="${TOOLS_DIR}:${PATH}"
 
+    - COMMIT_HASH=${TRAVIS_COMMIT::8}
+
     # Service Information
     - SERVICE_NAME=qotm
 
@@ -24,16 +26,18 @@ env:
     - GH_REPO="${TRAVIS_REPO_SLUG}"
 
     # Docker Configuration
-    - DOCKER_IMAGE=datawire/${SERVICE_NAME}:${TRAVIS_COMMIT}
+    - DOCKER_IMAGE=datawire/${SERVICE_NAME}:${COMMIT_HASH}
 
     # Kubernetes Configuration
     - NAMESPACE=datawire
 
     # Secure Credentials
     #
+    # - DOCKER_USERNAME
+    # - DOCKER_PASSWORD
     # - GH_TOKEN
     #
-    - secure: "nVdndthl4J+kobY6L+KepewsRo+yR2xmU3DKipz1oPBu34Q7w0hKyMeXHrbuxj6gKKVjlGyPYnvL9xuxgWj9rezNguLpi0QOeL3d25jKBjtZjiIk4Gr8wgIckh6Yy71KRfVxWayW4LRLIBtZfOsZLMNCZtDXLOQWXU9a5/zhmr06RLFBkqyqOodKD69W8acXc1Uhh0+uBwgkX8fn8GRxUdnknUmVzCBx0DNEW+zy4rcb+cX+2Ep7COkmRF2JWOK9z80INkoPbdfN3db355iO2GOk1C8Bp3svJz7p/dkGoIhoOjHntbCmxKzEyyQYeeo3/lvCE5vEHnTehmd6ogAEg6j8wOPIeDUqGAMDymlf1aSMxKL2DmZO1xFyo7AxShjIEprkLPLyzA2ZjDYG06ZkZoO6kQRgHHisIZEBelydrVQnZKHk5w/kLBsF/K3KG6SAoLaqU/g7CsFjEz5wxq5vjDwKSVmUCAq3zC5d9aYijHO20jdZt2WCQPZbSqr2IJNgSwnwCZ43vQRMO1Ur7E6weEet5ldOiDBUFhdxBI7UW9Q/Qo19BDlmUwf90ACPH4/TD/WteoDeZkH1o6n1OcfPmaOKFWbq+ZAxaddyeFCE5eE2kSllCrb4bwyB5j9LD5vvEt2gg1M5l52f+DNM7Vw2hOkGFEIagCW8Ry39494HMCg="
+    - secure: "SdK/BMCiGrhHdqhnacTP5Nec8Hb00ut2OkbnKj24jPfqOCWMUW3rbbCJVGFqU4lV4SGd8MF5p5HQBMSxxu3aUltr0YZxWlqCM5SEiMUsc7FuyMfGTDTqrIARwhSNAYnraBEuCBDJ3wJLHTLVNMbPF/QyjxQH4sA59XERq6yaIsqjOPLo0NPq6YWQOd87sg2PEjUWCXkhHtCXZsirli5Jol2/jeis9QWRXHHdRHrESLVzes6WmgO0mu+XkalgZqxR7QfOPbdbTBUIjarEX9223wV6Lz82c+8JtT8gA7vqXSUsNSYyTvvWtNQsrRy6npHqWWn4wxE8dI06VF/yjfTLeDCKnsQhUPT98IcxWhwGRkSbUF9R76D3cEJypsEf3SKP/NaJdaXrLJlB/nc18Wm6LvCzKbAzI0llSsBXCJwfEaNhbAUyuK+ANrkjHXW99JD7+FEOAGNYEv9aTsd4vhrXu5xQr4Y0vp4UHs/LCFPwLD3QNfxbDFCSHV0b/HCv/hpynfR+VoBKCBbhX/pwGcbs1wJvZoIccmIirBej4qpUyQoWiVJ+JJhhJnmpvWSLCtEZKuNHtS+NZPd7rAg3rlUUwl59nX+ndbwu30WMzJwiTdGlGCmm68MYYie6P8/MiNFzRFt6AnFXd5IUj4mDYK6JH7pGheXVTY4X/omhs/ob0us="
 
 cache:
   pip: true
@@ -52,7 +56,10 @@ script:
   - set -e
   - bash travis/configure_git.sh
   - bash travis/build_docker_image.sh
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - bash travis/push_docker_image.sh
   - bash travis/deploy_ephemeral.sh
+
 
 #after_success:
 #  - bash travis/push_docker_image.sh
