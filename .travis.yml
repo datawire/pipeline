@@ -42,6 +42,7 @@ cache:
 
 before_install:
   - bash travis/setup_travis.sh
+  - kubectl cluster-info
 
 install:
   - set -e
@@ -51,7 +52,7 @@ script:
   - set -e
   - bash travis/configure_git.sh
   - bash travis/build_docker_image.sh
-#  - bash travis/deploy_ephemeral.sh
+  - bash travis/deploy_ephemeral.sh
 
 #after_success:
 #  - bash travis/push_docker_image.sh
