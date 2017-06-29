@@ -1,0 +1,62 @@
+---
+sudo: false
+dist: trusty
+language: generic
+
+services:
+  - docker
+
+env:
+  global:
+    - TOOLS_DIR=${HOME}/bin
+    - PATH="${TOOLS_DIR}:${PATH}"
+
+    # Service Information
+    - SERVICE_NAME=qotm
+
+    # Kubectl Configuration
+    - KUBECTL_VERSION=1.6.6
+    - KUBECTL_SHA256SUM=c7e1830010f58ca42e4b201ea712683d1f52f4c43b2af28cbe216257da963645
+
+    # GitHub Configuration
+    - GH_USERNAME="d6e-automaton"
+    - GH_USER_EMAIL="dev@datawire.io"
+    - GH_REPO="${TRAVIS_REPO_SLUG}"
+
+    # Docker Configuration
+    - DOCKER_IMAGE=datawire/${SERVICE_NAME}:${TRAVIS_COMMIT}
+
+    # Kubernetes Configuration
+    - NAMESPACE=datawire
+
+cache:
+  pip: true
+  directories:
+    - "${HOME}/bin"
+
+before_install:
+  - bash travis/setup_travis.sh
+
+install:
+  - set -e
+  - bash travis/install_kubectl.sh
+
+script:
+  - set -e
+  - bash travis/configure_git.sh
+  - bash travis/build_docker_image.sh
+#  - bash travis/deploy_ephemeral.sh
+
+#after_success:
+#  - bash travis/push_docker_image.sh
+
+#after_success:
+##  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash bin/generate_terraform_plan.sh; fi
+##  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then python3 bin/comment_pull_request.py; fi
+#
+#deploy:
+#  - provider: script
+#    skip_cleanup: true
+#    script: travis/deploy.sh prod
+#    on:
+#      branch: master
