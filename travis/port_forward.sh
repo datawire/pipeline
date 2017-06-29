@@ -6,4 +6,4 @@ NAMESPACE="${NAMESPACE}-${COMMIT_HASH}"
 POD="$(kubectl get pod --namespace=${NAMESPACE} -l app=qotm -o jsonpath='{.items[0].metadata.name}')"
 
 echo "Found Pod $POD"
-kubectl port-forward --namespace=${NAMESPACE} ${POD} 5000:5000 &
+kubectl port-forward --namespace=${NAMESPACE} ${POD} 5000:5000 > /dev/null 2>&1 &
