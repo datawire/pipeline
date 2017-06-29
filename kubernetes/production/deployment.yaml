@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: qotm
-        image: datawire/qotm:ca46d091
+        image: datawire/qotm:91ef9314
         ports:
         - name: http-api 
           containerPort: 5000
